@@ -1,0 +1,52 @@
+﻿@page
+@model Restaurants.ListModel
+@{
+}
+<h1>Welcome to restaurants</h1>
+
+<p>@Model.MyPropString</p>
+
+<form method="get">
+    <div class="input-group col-md-4">
+        <input class="form-control py-2" type="search"
+               asp-for="SearchTerm">
+        <span class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </span>
+    </div>
+</form>
+
+<p>List of all the available restaurants:</p>
+<div>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Cuisine</th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var r in Model.Restaurants)
+        {
+
+        <tr>
+            <td>@r.Name</td>
+            <td>@r.Location</td>
+            <td>@r.Cuisine</td>
+            <td>
+                <a asp-page="./Detail" asp-route-restaurantId="@r.Id">
+                    <i class="fa fa-info" aria-hidden="true"></i>
+                </a>
+                <a asp-page="./Edit" asp-route-restaurantId="@r.Id">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </a>
+            </td>
+        </tr>
+
+        }
+    </table>
+
+    <a asp-page="./Edit" class="btn btn-primary">Add new</a>
+</div>
