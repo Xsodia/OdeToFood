@@ -6,6 +6,11 @@ namespace OdeToFood.Data
 {
     public class OdeToFoodDbContext : DbContext
     {
-        public DbSet<Restaurant> restaurants { get; set; }
+        public OdeToFoodDbContext(DbContextOptions<OdeToFoodDbContext> options) : base(options)
+        {
+
+        }
+
+        public DbSet<Restaurant> Restaurants { get; set; }
     }
 }

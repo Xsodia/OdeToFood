@@ -11,7 +11,6 @@
     <None Remove="FontAwesome" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Pages\Restaurants\" />
     <Folder Include="wwwroot\" />
     <Folder Include="wwwroot\font-awesome\" />
   </ItemGroup>
