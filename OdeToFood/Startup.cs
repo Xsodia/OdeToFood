@@ -30,12 +30,16 @@ namespace OdeToFood.net
                 options.UseSqlServer(Configuration.GetConnectionString("OdeToFoodDb"));
             });
 
-            services.AddRazorPages();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddControllers();
+
             services.AddScoped<IRestaurantData, SqlRestaurantData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        [Obsolete]
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, 
+            Microsoft.AspNetCore.Hosting.IHostingEnvironment envScott)
         {
             if (env.IsDevelopment())
             {
@@ -50,6 +54,7 @@ namespace OdeToFood.net
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseNodeModules(maxAge: TimeSpan.FromSeconds(600));
 
             app.UseRouting();
 
@@ -58,7 +63,9 @@ namespace OdeToFood.net
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
+
         }
     }
 }
